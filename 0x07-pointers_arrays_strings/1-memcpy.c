@@ -1,4 +1,3 @@
-
 /**
 
  * _memcpy - copies memory area
