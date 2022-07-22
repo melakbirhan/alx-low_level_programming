@@ -1,1 +1,2 @@
-read me at fri jul.22/2022
+0x08. C - Static libraries About An introductory project on:
+static libraries, how they work, how to create one, and how to use them
