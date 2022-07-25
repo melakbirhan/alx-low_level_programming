@@ -9,6 +9,7 @@
 int number(char *str)
 {
 	int a, num = 0;
+
 	for (a = 0; str[a] != '\0'; a++)
 	{
 		if (*str == ' ')
@@ -41,8 +42,11 @@ void free_everything(char **string, int i)
 char **strtow(char *str)
 {
 	int total_words = 0, b = 0, c = 0, length = 0;
+	
 	char **words;
-	 char  *found_word;
+	
+	char  *found_word;
+	
 	if (str == 0 || *str == 0)
 		return (NULL);
 	total_words = number(str);
@@ -76,7 +80,10 @@ char **strtow(char *str)
 				c++;
 			}
 			words[b][c] = '\0';
-			b++; c = 0; length = 0; str++;
+			b++;
+			c = 0;
+			length = 0;
+			str++;
 		}
 	}
 	return (words);
