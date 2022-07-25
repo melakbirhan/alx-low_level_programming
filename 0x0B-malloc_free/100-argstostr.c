@@ -34,4 +34,6 @@ char *argstostr(int ac, char **av)
 		}
 		return (ptr);
 	}
-	else	
+	else
+		return (NULL);
+}
