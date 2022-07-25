@@ -4,6 +4,7 @@
 /**
  * number - function to calculate number of words
  * @str: string being passed to check for words
+ *
  * Return: number of words
  */
 int number(char *str)
@@ -44,7 +45,7 @@ char **strtow(char *str)
 	int total_words = 0, b = 0, c = 0, length = 0;
 	
 	char **words;
-	
+
 	char  *found_word;
 	
 	if (str == 0 || *str == 0)
@@ -62,7 +63,7 @@ char **strtow(char *str)
 		else
 		{
 			found_word = str;
-			for (; *str != ' ' && *str != '\0';)
+			for (;*str != ' ' && *str != '\0';)
 			{
 				length++;
 				str++;
