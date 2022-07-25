@@ -40,7 +40,8 @@ void free_everything(char **string, int i)
  * @str: string being passed
  * Return: null if string is eAOAmpty or null or function fails
  */
-char **strtow(char *str){
+char **strtow(char *str)
+{
 	int total_words = 0, b = 0, c = 0, length = 0;
 
 	char **words;
@@ -53,21 +54,25 @@ char **strtow(char *str){
 	words = malloc((total_words + 1) * sizeof(char *));
 	if (words == 0)
 		return (NULL);
-	for (; *str != '\0' &&  b < total_words;){
+	for (; *str != '\0' &&  b < total_words;)
+	{
 		if (*str == ' ')
 			str++;
 		else{
 			found_word = str;
-			for (; *str != ' ' && *str != '\0';){
+			for (; *str != ' ' && *str != '\0';)
+			{
 				length++;
 				str++;
 			}
 			words[b] = malloc((length + 1) * sizeof(char));
-			if (words[b] == 0){
+			if (words[b] == 0)
+			{
 				free_everything(words, b);
 				return (NULL);
 			}
-			while (*found_word != ' ' && *found_word != '\0'){
+			while (*found_word != ' ' && *found_word != '\0')
+			{
 				words[b][c] = *found_word;
 				found_word++;
 				c++;
