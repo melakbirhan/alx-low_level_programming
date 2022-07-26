@@ -43,7 +43,6 @@ void free_everything(char **string, int i)
 char **strtow(char *str)
 {
 	int total_words = 0, b = 0, c = 0, length = 0;
-	
 	char **words;
 
 	char  *found_word;
@@ -81,7 +80,10 @@ char **strtow(char *str)
 				c++;
 			}
 			words[b][c] = '\0';
-			b++; c = 0; length = 0; str++;
+			b++;
+			c = 0; 
+			length = 0; 
+			str++;
 		}
 	}
 	return (words);
