@@ -1,113 +1,85 @@
-#include "holberton.h"
+#include "main.h"
+#include <stdio.h>
 #include <stdlib.h>
-
 /**
- * _strlen - returns the length of a string
+ * number - function to calculate number of words
+ * @str: string being passed to check for words
  *
- * @s: string type char
- * Return: returns the lenght of a string
+ * Return: number of words
  */
-int _strlen(char *s)
+int number(char *str)
 {
-	int len;
-
-	len = 0;
-	while (*s++ != '\0')
-		len++;
-
-	return (len);
-}
-
-/**
- * count_words - counts the number of words in a string
- *
- * @str: The string
- * Return: The number of words or
- * any characters separated by spaces
- */
-int count_words(char *str)
-{
-	int i;
-	int count = 0, word = 0;
-
-	i = 0;
-	while (str[i] != '\0')
+	int a, num = 0;
+	for (a = 0; str[a] != '\0'; a++)
 	{
-		if (str[i] != ' ' && word == 0)
+		if (*str == ' ')
+			str++;
+		else
 		{
-			count++;
-			word = 1;
+			for (; str[a] != ' ' && str[a] != '\0'; a++)
+				str++;
+			num++;
 		}
-		else if (str[i] == ' ')
-		{
-			word = 0;
-		}
-		i++;
 	}
-
-	return (count);
+	return (num);
 }
-
 /**
- * free_gridc - frees a 2 dimensional grid
- * @grid: grid to free
- * @height: height of grid
- * Return: void
+ * free_everything - frees the memory
+ * @string: pointer values being passed for freeing
+ * @i: counter
  */
-void free_gridc(char **grid, int height)
+void free_everything(char **string, int i)
 {
-	int i;
-
-	i = 0;
-	while (i < height)
-		free(grid[i++]);
-
-	free(grid);
+	for (; i > 0;)
+	free(string[--i]);
+	free(string);
 }
-
-
 /**
- * strtow - function that splits a string into words.
- * @str: input
- * Return: a pointer to an array of strings (words)
+ * strtow - function that splits string into words
+ * @str: string being passed
+ * Return: null if string is empty or null or function fails
  */
 char **strtow(char *str)
 {
-	int i, j = 0, k, temp_len = 0;
-	char **arr;
+	int total_words = 0, b = 0, c = 0, length = 0;
 
-	if (str == NULL || _strlen(str) == 0)
-		return (NULL);
-	if (count_words(str) == 0)
-		return (NULL);
-	arr = (char **)malloc((count_words(str) + 1) * sizeof(char *));
-	if (arr == NULL)
-		return (NULL);
+	char **words, *found_word;
 
-	for (i = 0; i < _strlen(str); i++)
+	if (str == 0 || *str == 0)
+		return (NULL);
+	total_words = number(str);
+	if (total_words == 0)
+		return (NULL);
+	words = malloc((total_words + 1) * sizeof(char *));
+	if (words == 0)
+		return (NULL);
+	for (; *str != '\0' &&  b < total_words;)
 	{
-		if (str[i] != ' ')
+		if (*str == ' ')
+			str++;
+		else
 		{
-			for (k = i, temp_len = 0; str[k] != '\0' && str[k] != ' '; k++)
-				temp_len++;
-
-			arr[j] = (char *)malloc((temp_len + 1) * sizeof(char));
-			if (arr[j] == NULL)
+			found_word = str;
+			for (; *str != ' ' && *str != '\0';)
 			{
-				free_gridc(arr, k);
+				length++;
+				str++;
+			}
+			words[b] = malloc((length + 1) * sizeof(char));
+			if (words[b] == 0)
+			{
+				free_everything(words, b);
 				return (NULL);
 			}
-			k = 0;
-			while (str[i] != '\0' && str[i] != ' ')
+			while (*found_word != ' ' && *found_word != '\0')
 			{
-				arr[j][k] = str[i];
-				i++;
-				k++;
+				words[b][c] = *found_word;
+				found_word++;
+				c++;
 			}
-			arr[j][k] = '\0';
-			j++;
+			words[b][c] = '\0';
+			b++; c = 0; length = 0; str++;
 		}
 	}
-	arr[j] = NULL;
-	return (arr);
+	return (words);
 }
